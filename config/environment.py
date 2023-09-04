@@ -19,6 +19,11 @@ class EnvironmentConfig:
         :returns: True or False depending on if the config key exists
         """
 
+        if config_key in environ:
+            return True
+        else:
+            return False
+
     def get(self, config_key: str) -> str:
         """
         Returns a string corresponding to the key provided, from the system environment.
