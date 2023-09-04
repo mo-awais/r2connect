@@ -6,8 +6,8 @@ from exceptions.environment import ConfigNotFound, ConfigAlreadyExists
 
 
 class EnvironmentConfig:
-    def __init__(self):
-        load_dotenv(path.join(path.abspath(path.dirname(__file__)), '.env'))
+    def __init__(self, environment: str = "production"):
+        load_dotenv(f'{environment}.env')
 
     @staticmethod
     def __exists(config_key: str) -> bool:
