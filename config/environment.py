@@ -1,5 +1,4 @@
-import sys
-from os import environ, path, pardir
+from os import environ
 from dotenv import load_dotenv
 
 from exceptions.environment import ConfigNotFound, ConfigAlreadyExists
