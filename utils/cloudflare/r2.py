@@ -37,6 +37,16 @@ class R2:
 
         return False
 
+    def __get_bucket(self, bucket_name: str):
+        """
+        Return a bucket instance using the specified bucket name
+
+        :param bucket_name: The bucket which is being queried
+        :return: A boto3 Bucket instance
+        """
+
+        return self.__r2_resource.Bucket(bucket_name)
+
     def __bucket_empty(self, bucket_name: str) -> bool:
         """
         Check if the specified bucket is empty
@@ -46,7 +56,7 @@ class R2:
         :returns: bool
         """
 
-        bucket = self.__r2_resource.Bucket(bucket_name)
+        bucket = self.__get_bucket(bucket_name)
 
         if len(list(bucket.objects.all())) > 0:
             return False
@@ -62,7 +72,9 @@ class R2:
         :returns: None
         """
 
-        for r2_object in self.__r2_resource.objects.all():
+        bucket = self.__get_bucket(bucket_name)
+
+        for r2_object in bucket.objects.all():
             r2_object.delete()
 
     def create_bucket(self, bucket_name: str) -> None:
