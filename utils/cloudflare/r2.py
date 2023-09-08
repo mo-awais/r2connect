@@ -109,7 +109,10 @@ class R2:
 
         if self.__bucket_exists(bucket_name):
             if self.__bucket_empty(bucket_name) or force_delete:
-                pass
+                self.__purge_bucket(bucket_name)
+
+                bucket = self.__get_bucket(bucket_name)
+                bucket.delete()
             else:
                 raise BucketIsNotEmpty(f"The following bucket must be empty before deleting: {bucket_name}")
         else:
