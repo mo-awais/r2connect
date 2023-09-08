@@ -105,6 +105,8 @@ class R2:
         :type: str
         :param force_delete: Force delete a non-empty bucket
         :type: bool
+        :raises BucketIsNotEmpty: If specified bucket contains object and force_delete flag is not set
+        :raises BucketDoesNotExist: If specified bucket does not exist
         :returns: None
         """
 
