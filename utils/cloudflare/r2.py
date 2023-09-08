@@ -100,6 +100,7 @@ class R2:
     def delete_bucket(self, bucket_name: str, force_delete: bool = False) -> None:
         """
         Delete a bucket with the specified name
+
         :param bucket_name: The bucket to be deleted
         :type: str
         :param force_delete: Force delete a non-empty bucket
