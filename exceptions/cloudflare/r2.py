@@ -11,3 +11,8 @@ class BucketDoesNotExist(Exception):
 class BucketIsNotEmpty(Exception):
     def __init__(self, message):
         super().__init__(message)
+
+
+class ObjectDoesNotExist(Exception):
+    def __init__(self, message):
+        super().__init__(message)
