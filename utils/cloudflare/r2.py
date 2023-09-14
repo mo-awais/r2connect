@@ -183,12 +183,17 @@ class R2:
         :returns: Hash string of the temporary file name
         """
 
-        temporary_filename = str(uuid.uuid4()) + "." + object_name.split(".")[1]
+        if self.__bucket_exists(bucket_name):
+            if self.__object_exists(bucket_name, object_name):
+                temporary_filename = str(uuid.uuid4()) + "-" + object_name
 
-        r2_object = self.__get_object(bucket_name, object_name)
-        r2_object.download_file(save_path + temporary_filename)
+                self.__get_object(bucket_name, object_name).download_file(save_path + temporary_filename)
 
-        return temporary_filename
+                return temporary_filename
+            else:
+                raise ObjectDoesNotExist(f"The following object does not exist in {bucket_name}: {object_name}")
+        else:
+            raise BucketDoesNotExist(f"The following bucket does not exist: {bucket_name}")
 
     def delete_file(self, object_name: str, bucket_name: str) -> None:
         """
