@@ -1,9 +1,10 @@
 import os
-import json
+import uuid
 
 import boto3
 
-from exceptions.cloudflare.r2 import BucketAlreadyExists, BucketIsNotEmpty, BucketDoesNotExist
+from utils.files.filepath import Filepath
+from exceptions.cloudflare.r2 import *
 
 
 class R2:
@@ -36,6 +37,33 @@ class R2:
                 return True
 
         return False
+
+    def __object_exists(self, bucket_name: str, object_name: str) -> bool:
+        """
+        Check if the specified object exists in the specified bucket
+
+        :param bucket_name: The bucket to check
+        :param object_name: The object to search for
+        :returns: bool
+        """
+
+        bucket = self.__get_bucket(bucket_name)
+
+        if list(bucket.objects.filter(Prefix=object_name)):
+            return True
+        else:
+            return False
+
+    def __get_object(self, bucket_name: str, object_name: str):
+        """
+        Get specified object from specified bucket and return as boto3 Object
+
+        :param bucket_name: The bucket to check
+        :param object_name: The object to fetch
+        :returns: boto3 Object
+        """
+
+        return self.__r2_resource.Object(bucket_name, object_name)
 
     def __get_bucket(self, bucket_name: str):
         """
@@ -118,5 +146,65 @@ class R2:
                 bucket.delete()
             else:
                 raise BucketIsNotEmpty(f"The following bucket must be empty before deleting: {bucket_name}")
+        else:
+            raise BucketDoesNotExist(f"The following bucket does not exist: {bucket_name}")
+
+    def upload_file(self, filepath: str, object_name: str, bucket_name: str) -> None:
+        """
+        Upload a file to a specified bucket with a specified value to save as
+
+        :param filepath: Filepath location of the file which must be uploaded
+        :param object_name: String name to save the file as
+        :param bucket_name: Bucket for file to be saved in
+        :type: str
+        :returns: None
+        :raises BucketDoesNotExist: If specified bucket does not exist
+        """
+
+        if self.__bucket_exists(bucket_name):
+            bucket = self.__get_bucket(bucket_name)
+            clean_filepath = Filepath.safe_filepath(filepath)
+            clean_object_name = Filepath.safe_filepath(object_name)
+
+            bucket.upload_file(
+                Filename=clean_filepath,
+                Key=clean_object_name
+            )
+        else:
+            raise BucketDoesNotExist(f"The following bucket does not exist: {bucket_name}")
+
+    def download_file(self, object_name: str, save_path: str, bucket_name: str) -> str:
+        """
+        Download a specified object from a specified bucket
+
+        :param object_name: The object to download
+        :param save_path: The location to temporarily save the object
+        :param bucket_name: The bucket to download from
+        :returns: Hash string of the temporary file name
+        """
+
+        temporary_filename = str(uuid.uuid4()) + "." + object_name.split(".")[1]
+
+        r2_object = self.__get_object(bucket_name, object_name)
+        r2_object.download_file(save_path + temporary_filename)
+
+        return temporary_filename
+
+    def delete_file(self, object_name: str, bucket_name: str) -> None:
+        """
+        Delete an object from a specified bucket
+
+        :param object_name: The object which must be deleted
+        :param bucket_name: The bucket to delete from
+        :raises BucketDoesNotExist: If the specified bucket does not exist
+        :raises ObjectDoesNotExist: If the specified object does not exist
+        :returns: None
+        """
+
+        if self.__bucket_exists(bucket_name):
+            if self.__object_exists(bucket_name, object_name):
+                self.__get_object(bucket_name, object_name).delete()
+            else:
+                raise ObjectDoesNotExist(f"The following object does not exist in {bucket_name}: {object_name}")
         else:
             raise BucketDoesNotExist(f"The following bucket does not exist: {bucket_name}")
