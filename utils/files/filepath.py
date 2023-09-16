@@ -12,11 +12,10 @@ class Filepath:
         """
 
         return re.sub(
-            r"'",
-            "",
-            re.sub(
-                r"[/\\?%*:;&#<>$`!{}@*= |\"<>\x7F\x00-\x1F]",
-                "-",
-                unsafe_filepath
-            )
+            r"[/\\?%*:;&#<>$`!{}@= |\"\x7F\x00-\x1F]",
+            "-",
+            unsafe_filepath
+        ).replace(
+            "'",
+            ""
         )
