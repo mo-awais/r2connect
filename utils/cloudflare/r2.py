@@ -4,7 +4,7 @@ import uuid
 import boto3
 
 from utils.files.filepath import Filepath
-from exceptions.cloudflare.r2 import *
+from exceptions.cloudflare.r2 import BucketDoesNotExist, BucketAlreadyExists, BucketIsNotEmpty, ObjectDoesNotExist
 
 
 class R2:
