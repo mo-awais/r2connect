@@ -6,11 +6,11 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 
 
-load_dotenv("test.env")
 db = SQLAlchemy()
 
 
 def create_app():
+    load_dotenv("test.env")
     server = Flask(__name__, template_folder="templates", static_folder="static")
 
     server.config["SECRET_KEY"] = os.environ.get("SQLALCHEMY_SECRET_KEY")

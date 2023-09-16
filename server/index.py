@@ -2,7 +2,7 @@ from flask import Blueprint, send_from_directory, render_template
 from . import db
 
 
-index = Blueprint("index", __name__)
+index = Blueprint("index", __name__, template_folder="../templates", static_folder="../static")
 
 
 @index.route("/favicon.ico", methods=["GET"])
@@ -11,5 +11,5 @@ def favicon():
 
 
 @index.route("/", methods=["GET"])
-def index():
+def home():
     return render_template("index.html")
