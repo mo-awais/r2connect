@@ -21,8 +21,6 @@ class R2:
             region_name=os.environ.get("REGION")
         )
 
-        self.__location_constraint = {"LocationConstraint": os.environ.get("REGION")}
-
     def __bucket_exists(self, bucket_name: str) -> bool:
         """
         Check if the specified bucket exits
