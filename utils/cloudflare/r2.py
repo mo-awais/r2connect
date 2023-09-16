@@ -161,11 +161,10 @@ class R2:
 
         if self.__bucket_exists(bucket_name):
             bucket = self.__get_bucket(bucket_name)
-            clean_filepath = Filepath.safe_filepath(filepath)
             clean_object_name = Filepath.safe_filepath(object_name)
 
             bucket.upload_file(
-                Filename=clean_filepath,
+                Filename=filepath,
                 Key=clean_object_name
             )
         else:
