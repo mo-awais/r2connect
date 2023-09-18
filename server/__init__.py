@@ -38,4 +38,7 @@ def create_app():
     from .index import index as index_blueprint
     server.register_blueprint(index_blueprint)
 
+    from .receipts import receipts as receipts_blueprint
+    server.register_blueprint(receipts_blueprint)
+
     return server
