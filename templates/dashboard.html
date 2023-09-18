@@ -15,7 +15,18 @@
                 <div class="card text-white">
                     <div class="card-body p-5 text-center">
                         <h1>Welcome {{ username }}!</h1>
-                        <a href="{{ url_for('auth.logout') }}">Logout</a>
+                        <br />
+                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="justify-content: center; display: flex;">
+                          <div class="btn-group me-2" role="group" aria-label="First group">
+                            <button type="button" class="btn btn-primary">View Receipts</button>
+                          </div>
+                          <div class="btn-group me-2" role="group" aria-label="Second group">
+                            <button type="button" class="btn btn-secondary">Add Receipt</button>
+                          </div>
+                          <div class="btn-group" role="group" aria-label="Third group">
+                            <a type="button" class="btn btn-info" href="{{ url_for('auth.logout') }}">Logout</a>
+                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
