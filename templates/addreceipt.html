@@ -8,10 +8,26 @@
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card text-white">
                     <div class="card-body p-5">
-                        <form action="#" method="post">
+                        <form action="{{ url_for('receipts.addreceipt') }}" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="company" class="form-label">Where did you buy this item from?</label>
+                                <input type="text" class="form-control" id="company" name="company" aria-describedby="company" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="item-name" class="form-label">What did you buy? Copy the item as it is on the receipt.</label>
+                                <input type="text" class="form-control" id="item-name" name="item-name" aria-describedby="item-name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="purchase-date" class="form-label">Purchase date</label>
+                                <input type="date" class="form-control" id="purchase-date" name="purchase-date" aria-describedby="purchase-date" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="form-label">Price</label>
+                                <input type="number" class="form-control" id="price" name="price" aria-describedby="price" required>
+                            </div>
                             <div class="mb-3">
                                 <label for="receipt" class="form-label">Upload receipt or take a picture</label>
-                                <input type="file" class="form-control" id="receipt" name="receipt" aria-describedby="receipt" accept="image/*" capture="camera" required>
+                                <input type="file" class="form-control" id="receipt" name="receipt" aria-describedby="receipt" accept="image/*,application/pdf" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Upload</button>
                         </form>
