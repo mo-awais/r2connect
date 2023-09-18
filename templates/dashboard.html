@@ -12,7 +12,7 @@
                         <br />
                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="justify-content: center; display: flex;">
                           <div class="btn-group me-2" role="group" aria-label="First group">
-                            <button type="button" class="btn btn-primary">View Receipts</button>
+                            <a type="button" class="btn btn-primary" href="{{ url_for('receipts.viewreceipts') }}">View Receipts</a>
                           </div>
                           <div class="btn-group me-2" role="group" aria-label="Second group">
                             <a type="button" class="btn btn-secondary" href="{{ url_for('receipts.addreceipt') }}">Add Receipt</a>

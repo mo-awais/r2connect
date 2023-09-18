@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} View Receipts {% endblock %}
+
+{% block content %}
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card text-white">
+                    <div class="card-body p-5">
+                        <div class="list-group">
+                            {% for receipt in receipts %}
+                                <a href="#" class="list-group-item list-group-item-action bg-dark" aria-current="true">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">{{ receipt.get('item_name') }}</h5>
+                                        <small>{{ receipt.get('purchase_date') }}</small>
+                                    </div>
+                                    <p class="mb-1">£{{ receipt.get('price') }}</p>
+                                    <small>{{ receipt.get('company') }}</small>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
