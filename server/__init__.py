@@ -4,9 +4,11 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 from .config import Config
+from utils.cloudflare.r2 import R2
 
 
 db = SQLAlchemy()
+r2 = R2()
 
 
 def create_app():
