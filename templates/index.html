@@ -15,14 +15,21 @@
                 <div class="card text-white">
                     <div class="card-body p-5 text-center">
                         <form action="{{ url_for('auth.login') }}" method="post">
+                            {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ messages[0] }}
+                                </div>
+                            {% endif %}
+                            {% endwith %}
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" aria-describedby="username" required>
+                                <input type="text" class="form-control" id="username" name="username" aria-describedby="username" required>
                                 <div id="usernameHelp" class="form-text">Please contact support if you need a username.</div>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" required>
+                                <input type="password" class="form-control" id="password" name="password" aria-describedby="password" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
