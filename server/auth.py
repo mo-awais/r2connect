@@ -1,6 +1,7 @@
 import uuid
 from flask import Blueprint, request, flash, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_user, login_required, logout_user
 
 from .models import User
 from . import db, r2
@@ -21,7 +22,15 @@ def login():
         flash("Please check your login details and try again.")
         return redirect(url_for("index.home"))
     else:
-        return "", 200
+        login_user(user)
+        return redirect(url_for("index.dashboard"))
+
+
+@auth.route("/logout", methods=["GET"])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("index.home"))
 
 
 @auth.route("/signup", methods=["POST"])
