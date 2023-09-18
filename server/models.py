@@ -15,3 +15,12 @@ class Receipts(db.Model):
     item_name = db.Column(db.String(100))
     purchase_date = db.Column(db.String(100))
     price = db.Column(db.String(100))
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "company": self.company,
+            "item_name": self.item_name,
+            "purchase_date": self.purchase_date,
+            "price": self.price
+        }
