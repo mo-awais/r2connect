@@ -21,3 +21,8 @@ class ObjectDoesNotExist(Exception):
 class ObjectAlreadyExists(Exception):
     def __init__(self, message):
         super().__init__(message)
+
+
+class MissingConfig(Exception):
+    def __init__(self, message):
+        super().__init__(message)
