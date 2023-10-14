@@ -190,6 +190,8 @@ class R2Client:
         :param object_name: The object to download
         :param save_path: The location to temporarily save the object, default None
         :param bucket_name: The bucket to download from
+        :raises BucketDoesNotExist: If the specified bucket does not exist
+        :raises ObjectDoesNotExist: If the specified object does not exist
         :returns: Hash string of the temporary file name
         """
 
