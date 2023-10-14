@@ -4,7 +4,7 @@ import uuid
 import boto3
 
 from utils.files.filepath import Filepath
-from exceptions.cloudflare.r2 import BucketDoesNotExist, BucketAlreadyExists, BucketIsNotEmpty, ObjectDoesNotExist
+from exceptions.cloudflare.r2 import BucketDoesNotExist, BucketAlreadyExists, BucketIsNotEmpty, ObjectDoesNotExist, ObjectAlreadyExists
 
 
 class R2:
@@ -157,16 +157,20 @@ class R2:
         :type: str
         :returns: None
         :raises BucketDoesNotExist: If specified bucket does not exist
+        :raises ObjectAlreadyExists: If an object with the same filename
         """
 
         if self.__bucket_exists(bucket_name):
             bucket = self.__get_bucket(bucket_name)
             clean_object_name = Filepath.safe_filepath(object_name)
 
-            bucket.upload_file(
-                Filename=filepath,
-                Key=clean_object_name
-            )
+            if self.__object_exists(bucket_name, clean_object_name):
+                raise ObjectAlreadyExists(f"An object already exists with the same filename: {clean_object_name}")
+            else:
+                bucket.upload_file(
+                    Filename=filepath,
+                    Key=clean_object_name
+                )
         else:
             raise BucketDoesNotExist(f"The following bucket does not exist: {bucket_name}")
 
