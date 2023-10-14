@@ -1,6 +1,6 @@
-# R2 Gateway
+# R2Connect
 
-The R2Gateway Python module provides a convenient interface for performing common operations on AWS S3 buckets while being compatible with Cloudflare's R2 service. It allows you to create, delete, upload, download and delete objects in an S3 bucket. It also allows creating and deleting buckets, handling various exceptions that might occur during these operations.
+The R2Connect Python module provides a convenient interface for performing common operations on AWS S3 buckets while being compatible with Cloudflare's R2 service. It allows you to create, delete, upload, download and delete objects in an S3 bucket. It also allows creating and deleting buckets, handling various exceptions that might occur during these operations.
 
 ## Table of Contents
 
@@ -16,10 +16,10 @@ The R2Gateway Python module provides a convenient interface for performing commo
 
 ## Installation
 
-You can install the **r2gateway** module using pip:
+You can install the **R2Connect** module using pip:
 
 ```bash
-pip install r2gateway
+pip install R2Connect
 ```
 
 ## Initialisation
@@ -34,11 +34,11 @@ Before initialising an **R2Client** class, make sure to set the following enviro
 To initialise an R2Client class, follow the example below:
 
 ```python
-from r2gateway.utils.cloudflare.r2client import R2Client
+from R2Connect.utils.cloudflare.r2client import R2Client
 
 try:
 	r2_client = R2Client()
-except r2gateway.exceptions.cloudflare.r2.MissingConfig as error:
+except R2Connect.exceptions.cloudflare.r2.MissingConfig as error:
 	# A required environment variable is missing
 	print(error)
 ```
@@ -50,7 +50,7 @@ To use the **R2Client** class, follow the examples below:
 ### Create a Bucket
 
 ```python
-from r2gateway.utils.cloudflare.r2client import R2Client
+from R2Connect.utils.cloudflare.r2client import R2Client
 
 # Initialise the R2Client class (as shown in the previous section)
 # ...
@@ -59,7 +59,7 @@ bucket_name = "my-new-bucket"
 
 try:
     r2_client.create_bucket(bucket_name)
-except r2gateway.exceptions.cloudflare.r2.BucketAlreadyExists as error:
+except R2Connect.exceptions.cloudflare.r2.BucketAlreadyExists as error:
     print(f"The specified bucket already exists: {bucket_name}")
 except Exception as error:
     print(error)
@@ -73,7 +73,7 @@ You can also set the `force_delete` flag to True which will delete the bucket an
 ##### Safe delete a bucket
 
 ```python
-from r2gateway.utils.cloudflare.r2client import R2Client
+from R2Connect.utils.cloudflare.r2client import R2Client
 
 # Initialise the R2Client class (as shown in the previous section)
 # ...
@@ -82,9 +82,9 @@ bucket_name = "my-existing-bucket"
 
 try:
     r2_client.delete(bucket_name)
-except r2gateway.exceptions.cloudflare.r2.BucketDoesNotExist as error:
+except R2Connect.exceptions.cloudflare.r2.BucketDoesNotExist as error:
     print(f"The specified bucket does not exist: {bucket_name}")
-except r2gateway.exceptions.cloudflare.r2.BucketIsNotEmpty as error:
+except R2Connect.exceptions.cloudflare.r2.BucketIsNotEmpty as error:
     print(f"The specified bucket is not empty, cannt safe delete: {bucket_name}")
 except Exception as error:
     print(error)
@@ -93,7 +93,7 @@ except Exception as error:
 ##### Force delete a bucket
 
 ```python
-from r2gateway.utils.cloudflare.r2client import R2Client
+from R2Connect.utils.cloudflare.r2client import R2Client
 
 # Initialise the R2Client class (as shown in the previous section)
 # ...
@@ -102,7 +102,7 @@ bucket_name = "my-existing-bucket"
 
 try:
     r2_client.delete(bucket_name, force_delete=True)
-except r2gateway.exceptions.cloudflare.r2.BucketDoesNotExist as error:
+except R2Connect.exceptions.cloudflare.r2.BucketDoesNotExist as error:
     print(f"The specified bucket does not exist: {bucket_name}")
 except Exception as error:
     print(error)
@@ -111,7 +111,7 @@ except Exception as error:
 ### Upload a File
 
 ```python
-from r2gateway.utils.cloudflare.r2client import R2Client
+from R2Connect.utils.cloudflare.r2client import R2Client
 
 # Initialise the R2Client class (as shown in the previous section)
 # ...
@@ -122,9 +122,9 @@ object_name = "file.txt"
 
 try:
 	r2_client.upload_file(file_path, object_name, bucket_name)
-except r2gateway.exceptions.cloudflare.r2.BucketDoesNotExist as error:
+except R2Connect.exceptions.cloudflare.r2.BucketDoesNotExist as error:
 	print(f"The specified bucket does not exist: {bucket_name}")
-except r2gateway.exceptions.cloudflare.r2.ObjectAlreadyExists as error:
+except R2Connect.exceptions.cloudflare.r2.ObjectAlreadyExists as error:
 	print(f"An object with the same object_key already exists: {object_name}")
 except Exception as error:
 	print(error)
@@ -136,7 +136,7 @@ A save filepath can be specified but is not required. If one isn't provided, the
 with the **user_id** as the prefix and the **filename** as the suffix.
 
 ```python
-from r2gateway.utils.cloudflare.r2client import R2Client
+from R2Connect.utils.cloudflare.r2client import R2Client
 
 # Initialise the R2Client class (as shown in the previous section)
 # ...
@@ -147,9 +147,9 @@ object_name = "file.txt"
 
 try:
 	r2_client.download_file(object_name, bucket_name, download_file_path)
-except r2gateway.exceptions.cloudflare.r2.ObjectDoesNotExist as error:
+except R2Connect.exceptions.cloudflare.r2.ObjectDoesNotExist as error:
 	print(f"The specified file does not exist: {object_name}")
-except r2gateway.exceptions.cloudflare.r2.BucketDoesNotExist as error:
+except R2Connect.exceptions.cloudflare.r2.BucketDoesNotExist as error:
 	print(f"The specified bucket does not exist: {bucket_name}")
 except Exception as error:
 	print(error)
@@ -158,7 +158,7 @@ except Exception as error:
 ### Delete a File
 
 ```python
-from r2gateway.utils.cloudflare.r2client import R2Client
+from R2Connect.utils.cloudflare.r2client import R2Client
 
 # Initialise the R2Client class (as shown in the previous section)
 # ...
@@ -168,9 +168,9 @@ object_name = "file.txt"
 
 try:
 	r2_client.delete_file(object_name, bucket_name)
-except r2gateway.exceptions.cloudflare.r2.ObjectDoesNotExist as error:
+except R2Connect.exceptions.cloudflare.r2.ObjectDoesNotExist as error:
 	print(f"The specified object does not exist in this bucket: {object_name}")
-except r2gateway.exceptions.cloudflare.r2.BucketDoesNotExist as error:
+except R2Connect.exceptions.cloudflare.r2.BucketDoesNotExist as error:
 	print(f"The specified bucket does not exist: {bucket_name}")
 except Exception as error:
 	print(error)
@@ -178,7 +178,7 @@ except Exception as error:
 
 ## Exception Handling
 
-The **R2Gateway** module provides exception handling for various scenarios.
+The **R2Connect** module provides exception handling for various scenarios.
 
 - **BucketAlreadyExists**: Raised when attempting to create a bucket that already exists.
 - **BucketDoesNotExist**: Raised when the specified bucket does not exist.
