@@ -3,8 +3,8 @@ from os import getenv, environ
 
 import boto3
 
-from utils.files.filepath import Filepath
-from exceptions.cloudflare.r2 import BucketDoesNotExist, BucketAlreadyExists, BucketIsNotEmpty, ObjectDoesNotExist, ObjectAlreadyExists, MissingConfig
+from .utils.files.filepath import Filepath
+from .exceptions.cloudflare.r2 import BucketDoesNotExist, BucketAlreadyExists, BucketIsNotEmpty, ObjectDoesNotExist, ObjectAlreadyExists, MissingConfig
 
 
 class R2Client:
