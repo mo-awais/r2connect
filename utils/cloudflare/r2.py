@@ -1,25 +1,34 @@
-import os
 import uuid
+from os import getenv, environ
 
 import boto3
 
 from utils.files.filepath import Filepath
-from exceptions.cloudflare.r2 import BucketDoesNotExist, BucketAlreadyExists, BucketIsNotEmpty, ObjectDoesNotExist, ObjectAlreadyExists
+from exceptions.cloudflare.r2 import BucketDoesNotExist, BucketAlreadyExists, BucketIsNotEmpty, ObjectDoesNotExist, ObjectAlreadyExists, MissingConfig
 
 
 class R2:
     def __init__(self) -> None:
         """
         Initialise the S3 client that will be used with the Cloudflare R2 services.
+
+        :raises MissingConfig: If a required variable is not found in the environment,
         """
 
-        self.__r2_resource = boto3.resource(
-            "s3",
-            endpoint_url=os.environ.get("ENDPOINT_URL"),
-            aws_access_key_id=os.environ.get("ACCESS_KEY"),
-            aws_secret_access_key=os.environ.get("SECRET_KEY"),
-            region_name=os.environ.get("REGION")
-        )
+        if "ENDPOINT_URL" not in environ:
+            raise MissingConfig("The following environment variable is missing: ENDPOINT_URL")
+        elif "ACCESS_KEY" not in environ:
+            raise MissingConfig("The following environment variable is missing: ACCESS_KEY")
+        elif "SECRET_KEY" not in environ:
+            raise MissingConfig("The following environment variable is missing: SECRET_KEY")
+        else:
+            self.__r2_resource = boto3.resource(
+                "s3",
+                endpoint_url=getenv("ENDPOINT_URL"),
+                aws_access_key_id=getenv("ACCESS_KEY"),
+                aws_secret_access_key=getenv("SECRET_KEY"),
+                region_name=getenv("REGION", "us-east-1")
+            )
 
     def __bucket_exists(self, bucket_name: str) -> bool:
         """
