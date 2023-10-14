@@ -170,23 +170,24 @@ class R2:
         else:
             raise BucketDoesNotExist(f"The following bucket does not exist: {bucket_name}")
 
-    def download_file(self, object_name: str, save_path: str, bucket_name: str) -> str:
+    def download_file(self, object_name: str, bucket_name: str, save_path: str = None) -> str:
         """
         Download a specified object from a specified bucket
 
         :param object_name: The object to download
-        :param save_path: The location to temporarily save the object
+        :param save_path: The location to temporarily save the object, default None
         :param bucket_name: The bucket to download from
         :returns: Hash string of the temporary file name
         """
 
         if self.__bucket_exists(bucket_name):
             if self.__object_exists(bucket_name, object_name):
-                temporary_filename = str(uuid.uuid4()) + "-" + object_name
-
-                self.__get_object(bucket_name, object_name).download_file(save_path + temporary_filename)
-
-                return temporary_filename
+                if save_path:
+                    self.__get_object(bucket_name, object_name).download_file(save_path)
+                else:
+                    temporary_filename = str(uuid.uuid4()) + "-" + object_name
+                    self.__get_object(bucket_name, object_name).download_file(temporary_filename)
+                    return temporary_filename
             else:
                 raise ObjectDoesNotExist(f"The following object does not exist in {bucket_name}: {object_name}")
         else:
