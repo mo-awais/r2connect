@@ -7,7 +7,7 @@ from utils.files.filepath import Filepath
 from exceptions.cloudflare.r2 import BucketDoesNotExist, BucketAlreadyExists, BucketIsNotEmpty, ObjectDoesNotExist, ObjectAlreadyExists, MissingConfig
 
 
-class R2Gateway:
+class R2Client:
     def __init__(self) -> None:
         """
         Initialise the S3 client that will be used with the Cloudflare R2 services.
