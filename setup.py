@@ -21,7 +21,7 @@ setup(
     description="R2Connect is a powerful Python module designed for seamless integration between AWS S3 and Cloudflare's R2 service. It offers a simple and intuitive interface to create, manage, and synchronize buckets, objects, and data, facilitating efficient backend operations in a reliable and secure manner. Streamline your S3 and R2 interactions with R2Connect.",
     long_description=readme,
     long_description_content_type="text/markdown",
-    url="https://github.com/mo-awais/r2gateway",
+    url="https://github.com/mo-awais/r2connect",
     packages=find_packages(),
     install_requires=requirements,
     classifiers=[
