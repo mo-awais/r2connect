@@ -14,11 +14,11 @@ requirements = [
 ]
 
 setup(
-    name="r2gateway",
+    name="r2connect",
     version="1.0.0",
     author="Mohammed Awais",
     author_email="awais@mohammedawais.me",
-    description="R2Gateway is a powerful Python module designed for seamless integration between AWS S3 and Cloudflare's R2 service. It offers a simple and intuitive interface to create, manage, and synchronize buckets, objects, and data, facilitating efficient backend operations in a reliable and secure manner. Streamline your S3 and R2 interactions with R2Gateway.",
+    description="R2Connect is a powerful Python module designed for seamless integration between AWS S3 and Cloudflare's R2 service. It offers a simple and intuitive interface to create, manage, and synchronize buckets, objects, and data, facilitating efficient backend operations in a reliable and secure manner. Streamline your S3 and R2 interactions with R2Connect.",
     long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/mo-awais/r2gateway",
