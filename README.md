@@ -4,15 +4,15 @@ The R2Gateway Python module provides a convenient interface for performing commo
 
 ## Table of Contents
 
- - Installation
- - Initialisation
- - Usage
-	 - Create a Bucket
-	 - Delete a Bucket
-	 - Upload a File
-	 - Download a File
-	 - Delete a File
- - Exception Handling
+ - [Installation](#installation)
+ - [Initialisation](#initialisation)
+ - [Usage](#usage)
+	 - [Create a Bucket](#create-a-bucket)
+	 - [Delete a Bucket](#delete-a-bucket)
+	 - [Upload a File](#upload-a-file)
+	 - [Download a File](#download-a-file)
+	 - [Delete a File](#delete-a-file)
+ - [Exception Handling](#exception-handling)
 
 ## Installation
 
