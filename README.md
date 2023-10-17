@@ -1,6 +1,6 @@
 # R2Connect
 
-[![Quality Gate Status](https://sonarqube.mohammedawais.me/api/project_badges/measure?project=r2connect&metric=alert_status&token=sqb_3eb4118826c69ab3eef4e975a6a5aae1eec63980)](https://sonarqube.mohammedawais.me/dashboard?id=r2connect)
+[![PyPI version](https://badge.fury.io/py/r2connect.svg)](https://badge.fury.io/py/r2connect)
 
 The R2Connect Python module provides a convenient interface for performing common operations on AWS S3 buckets while being compatible with Cloudflare's R2 service. It allows you to create, delete, upload, download and delete objects in an S3 bucket. It also allows creating and deleting buckets, handling various exceptions that might occur during these operations.
 
