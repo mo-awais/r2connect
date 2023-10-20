@@ -51,6 +51,8 @@ To use the **R2Client** class, follow the examples below:
 
 ### Create a Bucket
 
+With Cloudflare's R2 service, only **us-east-1** can be used. R2 uses the region for AWS compatibility only.
+
 ```python
 from r2connect.r2client import R2Client
 
@@ -58,9 +60,10 @@ from r2connect.r2client import R2Client
 # ...
 
 bucket_name = "my-new-bucket"
+region = "us-east-1"  # Must be us-east-1 when using Cloudflare R2
 
 try:
-    r2_client.create_bucket(bucket_name)
+    r2_client.create_bucket(bucket_name, region)
 except r2connect.exceptions.cloudflare.r2.BucketAlreadyExists as error:
     print(f"The specified bucket already exists: {bucket_name}")
 except Exception as error:

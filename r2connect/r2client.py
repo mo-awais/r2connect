@@ -112,11 +112,12 @@ class R2Client:
         for r2_object in bucket.objects.all():
             r2_object.delete()
 
-    def create_bucket(self, bucket_name: str) -> None:
+    def create_bucket(self, bucket_name: str, region: str) -> None:
         """
         Create a new bucket with the specified name
 
         :param bucket_name: Bucket name for new bucket
+        :param region: AWS Region for the new bucket.
         :type: str
         :raises BucketNotFound: If bucket already exists
         :returns: None
@@ -128,7 +129,7 @@ class R2Client:
             self.__r2_resource.create_bucket(
                 Bucket=bucket_name,
                 CreateBucketConfiguration={
-                    "LocationConstraint": "us-east-1"
+                    "LocationConstraint": region
                 }
             )
 
