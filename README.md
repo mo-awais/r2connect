@@ -39,10 +39,10 @@ To initialise an R2Client class, follow the example below:
 from r2connect.r2client import R2Client
 
 try:
-	r2_client = R2Client()
+    r2_client = R2Client()
 except r2connect.exceptions.cloudflare.r2.MissingConfig as error:
-	# A required environment variable is missing
-	print(error)
+    # A required environment variable is missing
+    print(error)
 ```
 
 ## Usage
