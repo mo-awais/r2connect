@@ -11,3 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Add `region` parameter to `create_bucket` method for AWS compatibility.
+
+## [1.1.2] - 2023-12-26
+
+### Added
+
+- Add Unit Tests
+
+### Changed
+
+- Fixed incorrect exception in docstring from `BucketNotFound` to `BucketAlreadyExists`
+- Upgraded urllib3 from `2.0.6` to `2.0.7` to patch information exposure vulnerability
