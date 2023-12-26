@@ -10,7 +10,7 @@ requirements = [
     "python-dateutil==2.8.2",
     "s3transfer==0.7.0",
     "six==1.16.0",
-    "urllib3==2.0.6"
+    "urllib3==2.0.7"
 ]
 
 setup(
