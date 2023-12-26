@@ -119,7 +119,7 @@ class R2Client:
         :param bucket_name: Bucket name for new bucket
         :param region: AWS Region for the new bucket.
         :type: str
-        :raises BucketNotFound: If bucket already exists
+        :raises BucketAlreadyExists: If bucket already exists
         :returns: None
         """
 
